@@ -13,8 +13,14 @@
 ---
 
 ### 專案簡介：
-「智慧飲品工坊」是一套結合物聯網與自動化技術的智慧飲品製作系統。使用者可透過 MIT App Inventor 所開發的點餐介面下單，資料經由 MQTT 傳輸至主控端，由 Python 控制 MyCobot280 M5 機械手臂完成飲品材料的自動取用與製作流程。產品外觀與輔助模組以 SolidWorks 設計並以 FDM 技術 3D 列印實作。
+「智慧飲品工坊」是一套結合物聯網與自動化技術的智慧飲品製作系統。使用者可透過 MIT App Inventor 所開發的點餐介面下單，資料經由 MQTT 傳輸至主控端，由 Python 控制 MyCobot280 M5 機械手臂完成飲品材料的自動取用與製作流程。產品外觀與輔助模組以 SolidWorks 設計並以 FDM 技術 3D 列印實作。<br>
+- 以下為專案流程圖(左)及機械運動邏輯流程圖(右):
+<p>
+  <img align="left" src="ProjectProcess.JPG" alt="專案流程圖" width="45%">
+  <img align="right" src="MachineMoving.JPG" alt="機械運動邏輯" width="45%">
+</p>
 
+<br><br><br><br><br><br><br><br><br><br><br><br>
 ---
 
 ### 主要貢獻與成果：
