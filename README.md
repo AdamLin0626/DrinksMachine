@@ -4,8 +4,8 @@
 App專案區  
 &emsp;&emsp;├ &emsp;&emsp; [AppInventor 版本（測試試用版_有完整功能及未來雛形 ）](https://github.com/AdamLin0626/DrinksMachine/tree/main/ClientApp_AppInventor(完整功能))  
 &emsp;&emsp;└ &emsp;&emsp; [AndroidStudio（Kotlin版本）持續撰寫中...](https://github.com/AdamLin0626/DrinksMachine/tree/main/ClientApp_Android(Kotilin)) &emsp;&emsp;  
-[模型零件](https://github.com/AdamLin0626/DrinksMachine/tree/main/3D_Oject)  
-[自動化機械控制檔案](https://github.com/AdamLin0626/DrinksMachinetree/blob//MachineControlFirmware.py)
+[模型零件](https://github.com/AdamLin0626/DrinksMachine/tree/main/3D_OBJ)  
+[自動化機械控制檔案](https://github.com/AdamLin0626/DrinksMachinetree/blob/main/MachineControlFirmware.py)
 
 ---
 
