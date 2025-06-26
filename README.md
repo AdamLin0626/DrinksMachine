@@ -1,4 +1,12 @@
 # 大學專題《智慧飲品工坊》
+
+
+&emsp;&emsp;[App專案區](https://github.com/AdamLin0626/DrinksMachine/tree/AppDevelopment) &emsp;&emsp; |
+&emsp;&emsp;[模型零件](https://github.com/AdamLin0626/DrinksMachine/tree/Oject) &emsp;&emsp; |
+&emsp;&emsp;[書面資料](https://github.com/AdamLin0626/DrinksMachine/tree/DevelopmentDocuments)  
+
+---
+
 **專案期間**：2024/9 ~ 2025/2  
 **專案分工**：  
 &emsp;&emsp; 呂柏毅 &nbsp;&nbsp; 機械手臂程序開發員 | 客戶端系統開發員 | 書面資料製作員  
