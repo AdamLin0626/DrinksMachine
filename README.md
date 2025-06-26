@@ -1,9 +1,11 @@
 # 大學專題《智慧飲品工坊》
 
 
-&emsp;&emsp;[App專案區](https://github.com/AdamLin0626/DrinksMachine/tree/AppDevelopment) &emsp;&emsp; |
-&emsp;&emsp;[模型零件](https://github.com/AdamLin0626/DrinksMachine/tree/Oject) &emsp;&emsp; |
-&emsp;&emsp;[書面資料](https://github.com/AdamLin0626/DrinksMachine/tree/DevelopmentDocuments)  
+&emsp;&emsp;[App專案區](https://github.com/AdamLin0626/DrinksMachine/tree/AppDevelopment) &emsp;&emsp; → &emsp;&emsp;
+[AppInventor 版本（測試試用版_有完整功能及未來雛形 ）](https://github.com/AdamLin0626/DrinksMachine/tree/AppDevelopment) &emsp;&emsp;  &  &emsp;&emsp;
+[AndroidStudio（Kotlin版本）持續撰寫中...](https://github.com/AdamLin0626/DrinksMachine/tree/AppDevelopment) &emsp;&emsp;  
+
+&emsp;&emsp;[模型零件](https://github.com/AdamLin0626/DrinksMachine/tree/Oject) 
 
 ---
 
