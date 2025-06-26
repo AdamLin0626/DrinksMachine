@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/rectangle_button"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="176sp"
+            android:layout_height="132sp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:hint="DrinksName"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/rectangle_button"
+            android:backgroundTint="@color/light_gray"
+            android:layout_width="176sp"
+            android:layout_height="45sp">
+            <ImageButton
+                android:id="@+id/MinusButton"
+                android:layout_width="30sp"
+                android:layout_height="match_parent"
+                android:src="@drawable/arrow_left"
+                android:backgroundTint="@color/invisible" />
+            <TextView
+                android:id="@+id/OptionName"
+                android:layout_width="110sp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="14sp" />
+            <ImageButton
+                android:id="@+id/PlusButton"
+                android:layout_width="30sp"
+                android:layout_height="match_parent"
+                android:src="@drawable/arrow_right"
+                android:backgroundTint="@color/invisible"/>
+        </LinearLayout>
+
+
+</LinearLayout>
