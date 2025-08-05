@@ -1,20 +1,37 @@
 package com.example.drankingmachine
 
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.ScrollView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.content.ContextCompat
+
 
 class Info_Page : AppCompatActivity() {
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_info_page)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val TitleText = ContextCompat.getString(this, R.string.title_information)
+        val BarColor = ContextCompat.getColor(this, R.color.sub_color)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(BarColor))
+        supportActionBar?.setTitle(TitleText)
+
+        val ScrollPage = ScrollView(this)
+        ScrollPage.setPadding(20, 20, 20, 20)
+        val ShowText = TextView(this).apply {
+            textSize = 20f
+            setTextColor(Color.BLACK)
         }
-    }
+
+        val inputStream = assets.open("Information.txt")
+        val content = inputStream.bufferedReader().use { it.readText() }
+        ShowText.text = content
+
+           ScrollPage.addView(ShowText)
+        setContentView(ScrollPage)
+        }
 }

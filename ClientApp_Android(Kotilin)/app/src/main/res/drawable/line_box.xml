@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-  
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color= "#00FFFFFF" /> <!-- 背景色 -->
+
+    <stroke
+        android:width="10dp"
+        android:color="@color/main_color" /> <!-- 邊框顏色與寬度 -->
+
+    <corners android:radius="8dp" /> <!-- 圓角，可選 -->
+</shape>

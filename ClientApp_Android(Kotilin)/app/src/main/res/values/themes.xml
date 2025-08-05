@@ -7,7 +7,7 @@
     <item name="colorPrimary">@color/main_color</item>
 
     <!-- 主要品牌顏色的變體（通常應用在狀態列） -->
-    <item name="colorPrimaryVariant">@color/main_color</item>
+    <item name="colorPrimaryVariant">@color/sub_color</item>
 
     <!-- 主要顏色上的文字或圖示顏色（例如白字） -->
     <item name="colorOnPrimary">@color/white</item>
@@ -20,9 +20,6 @@
 
     <!-- 次要顏色上的文字或圖示顏色 -->
     <item name="colorOnSecondary">@color/white</item>
-
-    <!-- 狀態列顏色（上方通知欄背景） -->
-    <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
 
     <!-- 你可以在這裡自定義其他主題屬性 -->
 

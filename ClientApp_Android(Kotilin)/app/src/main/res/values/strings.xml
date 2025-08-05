@@ -14,7 +14,24 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <!-- BarTitle -->
+    <string name="title_information">Information</string>
+    <string name="title_history">History</string>
+    <string name="title_setting">Setting</string>
+    <!-- Choosing page -->
+    <string name="plaintext_drink">DRINK</string>
+    <string name="plaintext_topping">TOPPING</string>
+    <string name="making_my_drink_button">Making My Drink</string>
+    <string name="confirm_choice">Confirm Your Choice</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="reselect">Reselect</string>
+    <string name="not_selected">Nothing is Selected !</string>
+    <string name="drink_is_empty">Please at Least Select one Drink.</string>
+    <!-- FinishPage -->
+    <string name="progress_preparing_text">Preparing...</string>
+    <string name="progress_finish_text">Enjoy Your Drink</string>
+    <string name="home_page_button">＜ HOME PAGE</string>
+    <!-- errorCode -->
+    <string name="plaintext_error">ERROR!!</string>
+    <string name="cannot_over_ten">Drink</string>
 </resources>

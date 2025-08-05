@@ -1,14 +1,23 @@
 package com.example.drankingmachine
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class Setting_Page : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val TitleText = ContextCompat.getString(this, R.string.title_setting)
+        val BarColor = ContextCompat.getColor(this, R.color.sub_color)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(BarColor))
+        supportActionBar?.setTitle(TitleText)
+
         enableEdgeToEdge()
         setContentView(R.layout.activity_setting_page)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

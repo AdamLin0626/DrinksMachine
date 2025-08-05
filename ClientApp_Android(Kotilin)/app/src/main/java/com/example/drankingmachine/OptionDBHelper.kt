@@ -16,13 +16,15 @@ class OptionDBHelper(context: Context) :
         )
 
         // 預設插入資料
-        db.execSQL("INSERT INTO options (name, type) VALUES ('紅茶', 'Drink')")
-        db.execSQL("INSERT INTO options (name, type) VALUES ('綠茶', 'Drink')")
-        db.execSQL("INSERT INTO options (name, type) VALUES ('奶茶', 'Drink')")
+        db.execSQL("INSERT INTO options (name, type) VALUES ('BlackTea', 'Drink')")
+        db.execSQL("INSERT INTO options (name, type) VALUES ('GreenTea', 'Drink')")
+        db.execSQL("INSERT INTO options (name, type) VALUES ('Milk', 'Drink')")
+        db.execSQL("INSERT INTO options (name, type) VALUES ('Chacolate', 'Drink')")
+        db.execSQL("INSERT INTO options (name, type) VALUES ('Coffee', 'Drink')")
 
-        db.execSQL("INSERT INTO options (name, type) VALUES ('珍珠', 'Topping')")
-        db.execSQL("INSERT INTO options (name, type) VALUES ('椰果', 'Topping')")
-        db.execSQL("INSERT INTO options (name, type) VALUES ('仙草', 'Topping')")
+        db.execSQL("INSERT INTO options (name, type) VALUES ('Pear', 'Topping')")
+        db.execSQL("INSERT INTO options (name, type) VALUES ('Coconut', 'Topping')")
+        db.execSQL("INSERT INTO options (name, type) VALUES ('GrassJelly', 'Topping')")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -31,18 +33,16 @@ class OptionDBHelper(context: Context) :
     }
 
     // 根據指定的類型（TypeA / TypeB）查詢對應的 label 並回傳清單
+    // 根據指定的類型（Drink / Topping）查詢對應的選項
     fun getOptionsByType(type: String): List<String> {
         val db = readableDatabase
-
-        // 執行 SQL 查詢語句，取得指定類型的選項
-        val cursor = db.rawQuery("SELECT label FROM options WHERE type = ?", arrayOf(type))
-
+        val cursor = db.rawQuery("SELECT name FROM options WHERE type = ?", arrayOf(type))
         val list = mutableListOf<String>()
         while (cursor.moveToNext()) {
-            list.add(cursor.getString(0))  // 取得第一欄（label）加入清單
+            list.add(cursor.getString(0))  // 取得 name 欄位值
         }
         cursor.close()
-
         return list
     }
+
 }

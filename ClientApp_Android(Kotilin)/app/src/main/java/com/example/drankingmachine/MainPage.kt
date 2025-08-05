@@ -32,12 +32,13 @@ class MainPage : AppCompatActivity() {
         SignButton = findViewById(R.id.SignButton)
         SettingButton = findViewById(R.id.SettingButton)
         InfoButton = findViewById(R.id.InfoButton)
+        RandomButton = findViewById(R.id.RandomButton)
 
         //頁面轉跳區
         val BtnListener = View.OnClickListener { view ->
             when (view.id) {
-                R.id.DiyButton -> startActivity(Intent(this, DiyPage_First::class.java))
-                R.id.HistoryButton -> startActivity(Intent(this, Historty_Page::class.java))
+                R.id.DiyButton -> startActivity(Intent(this, DiyPage::class.java))
+                R.id.HistoryButton -> startActivity(Intent(this, History_Page::class.java))
                 R.id.LoginButton -> startActivity(Intent(this, Login_Page::class.java))
                 R.id.SignButton -> startActivity(Intent(this, SignUp_Page::class.java))
                 R.id.SettingButton -> startActivity(Intent(this, Setting_Page::class.java))
@@ -57,5 +58,7 @@ class MainPage : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
     }
+
 }

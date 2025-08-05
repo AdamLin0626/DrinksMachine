@@ -6,5 +6,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Finish_Page">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
+        <ImageView
+            android:id="@+id/ProgressImageShow"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:src="@drawable/prepared" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"/>
+        <TextView
+            android:id="@+id/ProgressTextShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="@string/progress_preparing_text"/>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"/>
+        <ProgressBar
+            android:id="@+id/ProgressBar"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+        <Button
+            android:id="@+id/HomePage_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_page_button" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

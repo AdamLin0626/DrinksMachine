@@ -5,5 +5,70 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiyPage_First">
+    tools:context=".DiyPage">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            tools:ignore="MissingConstraints">
+            <!-- 分頁標籤 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/DrinkFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/plaintext_drink"
+                    android:textSize="18sp" />
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/ToppingFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plaintext_topping"
+                    android:textSize="18sp"
+                    android:padding="5dp" />
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="600dp">
+            <FrameLayout
+                android:id="@+id/fragment_container_drink"
+                android:layout_width="409dp"
+                android:layout_height="729dp"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="1dp">
+            </FrameLayout>
+        </ScrollView>
+        <Button
+            android:id="@+id/NextPage_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:background="@drawable/rounded_rectangle_button"
+            android:backgroundTint="@color/main_color"
+            android:text="@string/making_my_drink_button"/>
+    </LinearLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
