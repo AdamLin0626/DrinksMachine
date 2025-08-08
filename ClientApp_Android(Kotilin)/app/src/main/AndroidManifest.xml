@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DrinksMachine"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
         <activity
             android:name=".Finish_Page"
             android:exported="false" />
@@ -23,7 +26,6 @@
         <activity
             android:name=".History_Page"
             android:exported="false" />
-
         <activity
             android:name=".DiyPage"
             android:exported="false" />
@@ -33,13 +35,22 @@
         <activity
             android:name=".Login_Page"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".MainPage"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity
             android:name=".MainPage"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>

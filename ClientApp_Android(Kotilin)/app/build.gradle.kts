@@ -1,3 +1,5 @@
+import org.apache.commons.compress.archivers.zip.UnsupportedZipFeatureException
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,6 +8,8 @@ plugins {
 android {
     namespace = "com.example.drankingmachine"
     compileSdk = 35
+
+    buildFeatures{viewBinding = true}
 
     defaultConfig {
         applicationId = "com.example.drankingmachine"
@@ -48,6 +52,7 @@ dependencies {
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.mediation.test.suite)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

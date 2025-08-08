@@ -1,9 +1,13 @@
 package com.example.drankingmachine
 
+import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Typeface
+import android.icu.text.CaseMap
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -12,31 +16,38 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import com.example.drankingmachine.databinding.ActivityDiyPageBinding
+import com.example.drankingmachine.databinding.MyDialogBinding
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.zip.Inflater
 
 class DiyPage : AppCompatActivity() {
 
+    private lateinit var objectBinding: ActivityDiyPageBinding
+    private lateinit var dialogBinding: MyDialogBinding
     private lateinit var fragmentDrink: OptionFragment
     private lateinit var fragmentTopping: OptionFragment
     private var fragment_container_drink: Fragment? = null
-
-    private  lateinit var  plaintext_drink: String
-    private  lateinit var  plaintext_topping: String
+    private lateinit var  plaintext_drink: String
+    private lateinit var  plaintext_topping: String
+    private lateinit var dialog: Dialog
+    private lateinit var viewDalog: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_diy_page)
+
+        objectBinding = ActivityDiyPageBinding.inflate(layoutInflater)
+        setContentView(objectBinding.root)
 
         supportActionBar?.hide()
-
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_diy_page)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+//        enableEdgeToEdge()
+//        setContentView(R.layout.activity_diy_page)
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+//            insets
+//        }
 
         plaintext_drink = getString(R.string.plaintext_drink)
         plaintext_topping = getString(R.string.plaintext_topping)
@@ -55,17 +66,17 @@ class DiyPage : AppCompatActivity() {
         fragment_container_drink = fragmentDrink
 
         // A 類型按鈕點擊事件（已在 XML 中定義 ID: btnA）
-        findViewById<Button>(R.id.DrinkFragment).setOnClickListener {
+        objectBinding.DrinkFragment.setOnClickListener {
             switchToFragment(fragmentDrink)
         }
 
         // B 類型按鈕點擊事件（已在 XML 中定義 ID: btnB）
-        findViewById<Button>(R.id.ToppingFragment).setOnClickListener {
+        objectBinding.ToppingFragment.setOnClickListener {
             switchToFragment(fragmentTopping)
         }
 
         // 下一步按鈕，整理選擇成 JSON 並換頁
-        findViewById<Button>(R.id.NextPage_Button).setOnClickListener {
+        objectBinding.NextPageButton.setOnClickListener {
             val selectedA = fragmentDrink.getSelectedOptions()
             val selectedB = fragmentTopping.getSelectedOptions()
 
@@ -74,7 +85,7 @@ class DiyPage : AppCompatActivity() {
                 put("TypeB", JSONArray(selectedB))
             }
 
-            Log.d("SelectedOptions", json.toString())
+            Log.i("NtPage", json.toString())
 
             // 將 JSONObject 轉成 name -> count 的 Map
             val drinkCountMap = mutableMapOf<String, Int>()
@@ -120,6 +131,16 @@ class DiyPage : AppCompatActivity() {
                 setPadding(60, 50, 60, 30)
                 textSize = 16f
             }
+            dialog = Dialog(this)
+            dialogBinding = MyDialogBinding.inflate(layoutInflater)
+            dialogBinding.dialogTitle
+//            if (drinkCountMap.isEmpty()) {
+//                AlertDialog.Builder(this)
+//                    .setTitle(getString(R.string.plaintext_error))
+//                    .setMessage("\n\n" + getString(R.string.drink_is_empty) + "\n\n")
+//                    .setNegativeButton(getString(R.string.confirm_button), null)
+//                    .show()
+//            }
             if (drinkCountMap.isEmpty()) {
                 AlertDialog.Builder(this)
                     .setTitle(getString(R.string.plaintext_error))

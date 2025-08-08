@@ -2,11 +2,12 @@ package com.example.drankingmachine
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.drankingmachine.adapterLogic.TextModel
+import com.example.drankingmachine.adapterLogic.settingListAdapter
 
 class Setting_Page : AppCompatActivity() {
 
@@ -18,12 +19,20 @@ class Setting_Page : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(ColorDrawable(BarColor))
         supportActionBar?.setTitle(TitleText)
 
-        enableEdgeToEdge()
         setContentView(R.layout.activity_setting_page)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+        val list = getTextList()
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        val adapter = settingListAdapter(list)
+        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = linearLayoutManager
     }
+
+    private fun getTextList() = mutableListOf(
+        TextModel("版本", "20250811"),
+        TextModel("11", "20250811"),
+        TextModel("22", "20250811")
+    )
 }
