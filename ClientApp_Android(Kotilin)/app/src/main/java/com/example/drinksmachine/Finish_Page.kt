@@ -1,4 +1,4 @@
-package com.example.drankingmachine
+package com.example.drinksmachine
 
 import android.content.Intent
 import android.os.Bundle
@@ -51,13 +51,13 @@ class Finish_Page : AppCompatActivity() {
             override fun run() {
                 if (progress <= 100) {
                     ProgressBar.progress = progress
-                    TextShow.text = getString(R.string.progress_preparing_text) + "$progress%"
+                    TextShow.text = getString(R.string.progressPreparing_text) + "$progress%"
                     progress += 10
                     handler.postDelayed(this, 500) // 每秒更新
                 }
                 else {
                     HomeButtom.visibility = View.VISIBLE
-                    TextShow.text = getString(R.string.progress_finish_text)
+                    TextShow.text = getString(R.string.progressFinish_text)
                     ImageShow.setImageResource(R.drawable.finish)
                 }
             }

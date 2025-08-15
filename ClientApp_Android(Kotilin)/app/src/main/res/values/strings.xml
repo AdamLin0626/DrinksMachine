@@ -26,13 +26,18 @@
     <string name="confirm_choice">Confirm Your Choice</string>
     <string name="confirm_button">Confirm</string>
     <string name="reselect">Reselect</string>
-    <string name="not_selected">Nothing is Selected !</string>
+    <string name="notSelected">Nothing is Selected !</string>
     <string name="drink_is_empty">Please at Least Select one Drink.</string>
     <!-- FinishPage -->
-    <string name="progress_preparing_text">Preparing...</string>
-    <string name="progress_finish_text">Enjoy Your Drink</string>
+    <string name="progressPreparing_text">Preparing...</string>
+    <string name="progressFinish_text">Enjoy Your Drink</string>
     <string name="home_page_button">＜ HOME PAGE</string>
     <!-- errorCode -->
     <string name="plaintext_error">ERROR!!</string>
     <string name="cannot_over_ten">Drink</string>
+    <!--Setting-->
+    <string name="title_firmwareNumber">firmware no.</string>
+    <string name="title_language">Language</string>
+    <string name="title_location">Location</string>
+    <string name="title_brightness">Brightness</string>
 </resources>

@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.drankingmachine"
+    namespace = "com.example.drinksmachine"
     compileSdk = 35
 
     buildFeatures{viewBinding = true}
 
     defaultConfig {
-        applicationId = "com.example.drankingmachine"
+        applicationId = "com.example.drinksmachine"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

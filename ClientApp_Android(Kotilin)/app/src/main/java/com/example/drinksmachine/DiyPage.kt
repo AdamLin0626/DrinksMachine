@@ -1,38 +1,26 @@
-package com.example.drankingmachine
+package com.example.drinksmachine
 
-import android.app.Activity
-import android.app.Dialog
+import com.example.drinksmachine.uniFeatures.MyDialog
 import android.content.Intent
 import android.graphics.Typeface
-import android.icu.text.CaseMap
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import com.example.drankingmachine.databinding.ActivityDiyPageBinding
-import com.example.drankingmachine.databinding.MyDialogBinding
+import com.example.drinksmachine.databinding.ActivityDiyPageBinding
 import org.json.JSONArray
 import org.json.JSONObject
-import java.util.zip.Inflater
 
 class DiyPage : AppCompatActivity() {
 
     private lateinit var objectBinding: ActivityDiyPageBinding
-    private lateinit var dialogBinding: MyDialogBinding
+
     private lateinit var fragmentDrink: OptionFragment
     private lateinit var fragmentTopping: OptionFragment
     private var fragment_container_drink: Fragment? = null
     private lateinit var  plaintext_drink: String
     private lateinit var  plaintext_topping: String
-    private lateinit var dialog: Dialog
-    private lateinit var viewDalog: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +29,6 @@ class DiyPage : AppCompatActivity() {
         setContentView(objectBinding.root)
 
         supportActionBar?.hide()
-//        enableEdgeToEdge()
-//        setContentView(R.layout.activity_diy_page)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
 
         plaintext_drink = getString(R.string.plaintext_drink)
         plaintext_topping = getString(R.string.plaintext_topping)
@@ -106,7 +87,7 @@ class DiyPage : AppCompatActivity() {
             val dialogMessage = buildString {
                 append("【"+ plaintext_drink +"】\n" )
                 if (drinkCountMap.isEmpty()) {
-                    append( getString(R.string.not_selected) + "\n")
+                    append( getString(R.string.notSelected) + "\n")
                 } else {
                     drinkCountMap.forEach { (name, count) ->
                         val percentCount = "$count" + "0％"
@@ -116,7 +97,7 @@ class DiyPage : AppCompatActivity() {
 
                 append("\n【"+ plaintext_topping +"】\n" )
                 if (toppingCountMap.isEmpty()) {
-                    append( getString(R.string.not_selected) + "\n")
+                    append( getString(R.string.notSelected) + "\n")
                 } else {
                     toppingCountMap.forEach { (name, count) ->
                         append(String.format("%-19s  x%3d\n", name, count))
@@ -124,39 +105,43 @@ class DiyPage : AppCompatActivity() {
                 }
             }
 
-            // 用 TextView 顯示對話框，指定等寬字體
-            val messageView = TextView(this).apply {
-                text = dialogMessage
-                typeface = Typeface.MONOSPACE  // ✅ 等寬字體
-                setPadding(60, 50, 60, 30)
-                textSize = 16f
-            }
-            dialog = Dialog(this)
-            dialogBinding = MyDialogBinding.inflate(layoutInflater)
-            dialogBinding.dialogTitle
-//            if (drinkCountMap.isEmpty()) {
-//                AlertDialog.Builder(this)
-//                    .setTitle(getString(R.string.plaintext_error))
-//                    .setMessage("\n\n" + getString(R.string.drink_is_empty) + "\n\n")
-//                    .setNegativeButton(getString(R.string.confirm_button), null)
-//                    .show()
-//            }
             if (drinkCountMap.isEmpty()) {
-                AlertDialog.Builder(this)
+                // 用 TextView 顯示對話框，指定等寬字體
+                val messageAboutError = TextView(this).apply {
+                    text = getString(R.string.drink_is_empty)
+                    typeface = Typeface.MONOSPACE  // ✅ 等寬字體
+                    setPadding(60, 50, 60, 30)
+                    textSize = 16f
+                }
+
+                val myDialog = MyDialog(this)
+                    .setBackgroundColor(color = R.color.sub_color)
                     .setTitle(getString(R.string.plaintext_error))
-                    .setMessage("\n\n" + getString(R.string.drink_is_empty) + "\n\n")
-                    .setNegativeButton(getString(R.string.confirm_button), null)
-                    .show()
+                    .setView(messageAboutError)
+                myDialog.setButtonL(getString(R.string.reselect)) {
+                    startActivity(Intent(this, DiyPage::class.java))
+                    myDialog.dismiss()
+                }
+                myDialog.show()
+
             }
             else{
-                AlertDialog.Builder(this)
+                // 用 TextView 顯示對話框，指定等寬字體
+                val messageView = TextView(this).apply {
+                    text = dialogMessage
+                    typeface = Typeface.MONOSPACE  // ✅ 等寬字體
+                    setPadding(60, 50, 60, 30)
+                    textSize = 16f
+                }
+
+                val myDialog = MyDialog(this)
                     .setTitle(getString(R.string.confirm_choice))
                     .setView(messageView)
-                    .setPositiveButton(getString(R.string.confirm_button)) { _, _ ->
-                        startActivity(Intent(this, Finish_Page::class.java))
-                    }
-                    .setNegativeButton(getString(R.string.reselect), null)
-                    .show()
+                myDialog.setButtonL(getString(R.string.reselect)) {
+                    startActivity(Intent(this, Finish_Page::class.java))
+                    myDialog.dismiss()
+                }
+                myDialog.show()
             }
         }
     }
@@ -171,5 +156,4 @@ class DiyPage : AppCompatActivity() {
             fragment_container_drink = target
         }
     }
-
 }

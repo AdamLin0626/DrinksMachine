@@ -1,4 +1,4 @@
-package com.example.drankingmachine
+package com.example.drinksmachine
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

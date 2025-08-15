@@ -1,4 +1,4 @@
-package com.example.drankingmachine
+package com.example.drinksmachine
 
 import android.os.Bundle
 import android.util.Log

@@ -1,4 +1,4 @@
-package com.example.drankingmachine
+package com.example.drinksmachine
 
 import org.junit.Test
 

@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="@string/progress_preparing_text"/>
+            android:text="@string/progressPreparing_text"/>
         <Space
             android:layout_width="wrap_content"
             android:layout_height="15dp"/>
