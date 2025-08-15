@@ -1,61 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+          xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <application
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:label="@string/app_name"
         android:icon="@drawable/app_icon_round"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.DrinksMachine"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        >
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-3940256099942544~3347511713"
+            />
+
         <activity
             android:name=".Finish_Page"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".Info_Page"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".SettingPage"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".History_Page"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".DiyPage"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".SignUp_Page"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".Login_Page"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".MainPage"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+            android:exported="false"
+            />
         <activity
-            android:name=".MainPage"
-            android:launchMode="singleTask"
+            android:name=".MainActivity"
             android:excludeFromRecents="true"
             android:exported="true"
-            android:finishOnTaskLaunch="false">
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleTask"
+            >
             <intent-filter>
+
                 <!-- 這是啟動入口 -->
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
                 <!-- 讓它能當 Launcher（主螢幕） -->
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
     </application>

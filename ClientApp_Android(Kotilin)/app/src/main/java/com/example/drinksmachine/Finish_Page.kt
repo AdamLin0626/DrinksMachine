@@ -44,7 +44,7 @@ class Finish_Page : AppCompatActivity() {
         HomeButtom.visibility = View.INVISIBLE
         startProgress()
         HomeButtom.setOnClickListener {
-            startActivity(Intent(this, MainPage::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
@@ -62,7 +62,7 @@ class Finish_Page : AppCompatActivity() {
                     TextShow.text = getString(R.string.progressFinish_text)
                     ImageShow.setImageResource(R.drawable.finish)
                     handler.postDelayed({
-                        startActivity(Intent(this@Finish_Page, MainPage::class.java))
+                        startActivity(Intent(this@Finish_Page, MainActivity::class.java))
                     }, 5000)
                 }
             }

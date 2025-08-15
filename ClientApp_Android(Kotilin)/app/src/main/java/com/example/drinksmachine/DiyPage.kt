@@ -6,17 +6,21 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.drinksmachine.databinding.ActivityDiyPageBinding
+import com.example.drinksmachine.databinding.ActivityMainPageBinding
 import org.json.JSONArray
 import org.json.JSONObject
 
-class DiyPage : AppCompatActivity() {
+class DiyPage : Fragment() {
 
-    private lateinit var objectBinding: ActivityDiyPageBinding
+    private lateinit var ObjectBinding: ActivityDiyPageBinding
 
     private lateinit var fragmentDrink: OptionFragment
     private lateinit var fragmentTopping: OptionFragment
@@ -24,13 +28,17 @@ class DiyPage : AppCompatActivity() {
     private lateinit var  plaintext_drink: String
     private lateinit var  plaintext_topping: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        ObjectBinding = ActivityDiyPageBinding.inflate(inflater, container, false)
+        return ObjectBinding.root
+    }
 
-        objectBinding = ActivityDiyPageBinding.inflate(layoutInflater)
-        setContentView(objectBinding.root)
-
-        supportActionBar?.hide()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         plaintext_drink = getString(R.string.plaintext_drink)
         plaintext_topping = getString(R.string.plaintext_topping)
@@ -40,7 +48,7 @@ class DiyPage : AppCompatActivity() {
         fragmentTopping = OptionFragment.newInstance("Topping")
 
         // 將兩個 Fragment 同時加入畫面，但預設只顯示 fragmentA
-        supportFragmentManager.beginTransaction()
+        childFragmentManager.beginTransaction()
             .add(R.id.fragment_container_drink, fragmentDrink)
             .add(R.id.fragment_container_drink, fragmentTopping)
             .hide(fragmentTopping)
@@ -49,17 +57,17 @@ class DiyPage : AppCompatActivity() {
         fragment_container_drink = fragmentDrink
 
         // A 類型按鈕點擊事件（已在 XML 中定義 ID: btnA）
-        objectBinding.DrinkFragment.setOnClickListener {
+        ObjectBinding.DrinkFragment.setOnClickListener {
             switchToFragment(fragmentDrink)
         }
 
         // B 類型按鈕點擊事件（已在 XML 中定義 ID: btnB）
-        objectBinding.ToppingFragment.setOnClickListener {
+        ObjectBinding.ToppingFragment.setOnClickListener {
             switchToFragment(fragmentTopping)
         }
 
         // 下一步按鈕，整理選擇成 JSON 並換頁
-        objectBinding.NextPageButton.setOnClickListener {
+        ObjectBinding.NextPageButton.setOnClickListener {
             val selectedA = fragmentDrink.getSelectedOptions()
             val selectedB = fragmentTopping.getSelectedOptions()
 
@@ -109,15 +117,15 @@ class DiyPage : AppCompatActivity() {
 
             if (drinkCountMap.isEmpty()) {
                 // 用 TextView 顯示對話框，指定等寬字體
-                val messageAboutError = TextView(this).apply {
+                val messageAboutError = TextView(requireContext()).apply {
                     text = getString(R.string.drink_is_empty)
                     typeface = Typeface.MONOSPACE  // ✅ 等寬字體
                     setPadding(30, 50, 30, 40)
                     textSize = 16f
                 }
 
-                val myDialog = MyDialog(this)
-                    .setBackgroundColor(ContextCompat.getColor(this, R.color.sub_color))
+                val myDialog = MyDialog(requireContext())
+                    .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.sub_color))
                     .setTitle(getString(R.string.plaintext_error))
                     .setMidButtonVisible(false)
                     .setRightButtonVisible(false)
@@ -130,15 +138,15 @@ class DiyPage : AppCompatActivity() {
             }
             else{
                 // 用 TextView 顯示對話框，指定等寬字體
-                val messageView = TextView(this).apply {
+                val messageView = TextView(requireContext()).apply {
                     text = dialogMessage
                     typeface = Typeface.MONOSPACE  // ✅ 等寬字體
                     setPadding(30, 50, 30, 40)
                     textSize = 16f
                 }
 
-                val myDialog = MyDialog(this)
-                    .setBackgroundColor(ContextCompat.getColor(this, R.color.sub_color))
+                val myDialog = MyDialog(requireContext())
+                    .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.sub_color))
                     .setTitle(getString(R.string.confirm_choice))
                     .setView(messageView)
                     .setMidButtonVisible(false)
@@ -147,7 +155,7 @@ class DiyPage : AppCompatActivity() {
                 }
                 myDialog.setButtonR(getString(R.string.confirm_button),Color.BLACK){
                     myDialog.dismiss()
-                    startActivity(Intent(this ,Finish_Page::class.java))
+                    startActivity(Intent(requireContext() ,Finish_Page::class.java))
                 }
                 myDialog.show()
             }
@@ -157,7 +165,7 @@ class DiyPage : AppCompatActivity() {
     // 切換 Fragment（使用 hide/show 可保留狀態，不重建畫面）
     private fun switchToFragment(target: Fragment) {
         if (fragment_container_drink != target) {
-            supportFragmentManager.beginTransaction()
+            childFragmentManager.beginTransaction()
                 .hide(fragment_container_drink!!)
                 .show(target)
                 .commit()

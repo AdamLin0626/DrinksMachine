@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -15,26 +16,31 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import com.example.drinksmachine.databinding.ActivityMainPageBinding
 import com.example.drinksmachine.uniFeatures.MyDialog
 
-
-class MainPage : AppCompatActivity() {
+class HomeFragment : Fragment(R.layout.activity_main_page) {
 
     private lateinit var ObjectBinging: ActivityMainPageBinding
     private var  clickCount = 0
-    
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        ObjectBinging = ActivityMainPageBinding.inflate(layoutInflater)
-        setContentView(ObjectBinging.root)
-        supportActionBar?.hide()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        ObjectBinging = ActivityMainPageBinding.inflate(inflater, container, false)
+        return ObjectBinging.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         /**
          * SettingPage換成要測的當首頁
          */
-//        startActivity(Intent(this, DiyPage::class.java))
+//        startActivity(Intent(requireContext(), DiyPage::class.java))
 //        finish()
 
         //頁面轉跳區
@@ -43,11 +49,11 @@ class MainPage : AppCompatActivity() {
                 ObjectBinging.logoIcon -> {
                     clickCount++
                     if (clickCount == 10){
-                        val dialog = MyDialog(this)
+                        val dialog = MyDialog(requireContext())
                             .setTitle("關閉畫面中～ 密碼?")
-                            .setBackgroundColor(ContextCompat.getColor(this, R.color.main_color))
+                            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.main_color))
                             .setMidButtonVisible(false)
-                        val editText = EditText(this).apply {
+                        val editText = EditText(requireContext()).apply {
                             inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
                             setPadding(35, 35, 35, 10)
                             background = null
@@ -60,7 +66,7 @@ class MainPage : AppCompatActivity() {
                             dialog.setView(editText)
                         dialog.setButtonR(getString(R.string.confirm_button), Color.RED) {
                             val pass = editText.text.toString()
-                            if( pass == "happyEnding") throw RuntimeException("App Crash") else Toast.makeText(this, "Password ❌",Toast.LENGTH_SHORT).show()
+                            if( pass == "happyEnding") throw RuntimeException("App Crash") else Toast.makeText(requireContext(), "Password ❌",Toast.LENGTH_SHORT).show()
                         }
                         dialog.setButtonL(getString(R.string.exit), Color.BLACK){
                             clickCount = 0
@@ -69,12 +75,12 @@ class MainPage : AppCompatActivity() {
                         dialog.show()
                     }
                 }
-                ObjectBinging.DiyButton -> startActivity(Intent(this, DiyPage::class.java))
-                ObjectBinging.HistoryButton -> startActivity(Intent(this, History_Page::class.java))
-                ObjectBinging.LoginButton -> startActivity(Intent(this, Login_Page::class.java))
-                ObjectBinging.SignButton -> startActivity(Intent(this, SignUp_Page::class.java))
-                ObjectBinging.SettingButton -> startActivity(Intent(this, SettingPage::class.java))
-                ObjectBinging.InfoButton -> startActivity(Intent(this, Info_Page::class.java))
+                ObjectBinging.DiyButton -> switchFragment(DiyPage())
+                ObjectBinging.HistoryButton -> startActivity(Intent(requireContext(), History_Page::class.java))
+                ObjectBinging.LoginButton -> startActivity(Intent(requireContext(), Login_Page::class.java))
+                ObjectBinging.SignButton -> startActivity(Intent(requireContext(), SignUp_Page::class.java))
+                ObjectBinging.SettingButton -> startActivity(Intent(requireContext(), SettingPage::class.java))
+                ObjectBinging.InfoButton -> startActivity(Intent(requireContext(), Info_Page::class.java))
             }
         }
         ObjectBinging.logoIcon.setOnClickListener(buttonListener)
@@ -86,12 +92,13 @@ class MainPage : AppCompatActivity() {
         ObjectBinging.InfoButton.setOnClickListener(buttonListener)
         ObjectBinging.SettingButton.setOnClickListener(buttonListener)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
+    }
+    private fun switchFragment(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment) // fragment_container 是 MainActivity 裡的 FrameLayout
+            .addToBackStack(null) // 按返回鍵回上一頁
+            .commit()
     }
 
 }
