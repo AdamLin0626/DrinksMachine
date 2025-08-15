@@ -38,7 +38,6 @@ class SettingPage : AppCompatActivity() {
                         throw RuntimeException("App Closing!")
                     }
                 }
-
                 OptionBinding.boxLanguage -> {
                     val dialog = MyDialog(this)
                         .setTitle("選擇語言啦～幹！")
@@ -46,9 +45,22 @@ class SettingPage : AppCompatActivity() {
                         .setLeftButtonVisible(true)
                         .setMidButtonVisible(false)
                         .setRightButtonVisible(false)
-                    dialog.setButtonL(getString(R.string.reselect)){
+                    dialog.setButtonR(getString(R.string.reselect) ,ContextCompat.getColor(this, R.color.sub_color)){
                         Toast.makeText(this, "按下左",Toast.LENGTH_LONG).show()
                             dialog.dismiss()
+                    }
+                    dialog.show()
+                }
+                OptionBinding.boxBrightness ->{
+                    val dialog = MyDialog(this)
+                        .setTitle("亮度")
+                        .setBackgroundColor(ContextCompat.getColor(this, R.color.main_color))
+                        .setLeftButtonVisible(true)
+                        .setMidButtonVisible(false)
+                        .setRightButtonVisible(false)
+                    dialog.setButtonR(getString(R.string.reselect),Color.CYAN){
+                        Toast.makeText(this, "按下左",Toast.LENGTH_LONG).show()
+                        dialog.dismiss()
                     }
                     dialog.show()
                 }

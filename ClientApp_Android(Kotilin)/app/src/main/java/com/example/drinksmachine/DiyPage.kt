@@ -2,11 +2,13 @@ package com.example.drinksmachine
 
 import com.example.drinksmachine.uniFeatures.MyDialog
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.drinksmachine.databinding.ActivityDiyPageBinding
 import org.json.JSONArray
@@ -110,16 +112,17 @@ class DiyPage : AppCompatActivity() {
                 val messageAboutError = TextView(this).apply {
                     text = getString(R.string.drink_is_empty)
                     typeface = Typeface.MONOSPACE  // ✅ 等寬字體
-                    setPadding(60, 50, 60, 30)
+                    setPadding(30, 50, 30, 40)
                     textSize = 16f
                 }
 
                 val myDialog = MyDialog(this)
-                    .setBackgroundColor(color = R.color.sub_color)
+                    .setBackgroundColor(ContextCompat.getColor(this, R.color.sub_color))
                     .setTitle(getString(R.string.plaintext_error))
+                    .setMidButtonVisible(false)
+                    .setRightButtonVisible(false)
                     .setView(messageAboutError)
-                myDialog.setButtonL(getString(R.string.reselect)) {
-                    startActivity(Intent(this, DiyPage::class.java))
+                myDialog.setButtonL(getString(R.string.reselect), Color.BLACK) {
                     myDialog.dismiss()
                 }
                 myDialog.show()
@@ -130,16 +133,21 @@ class DiyPage : AppCompatActivity() {
                 val messageView = TextView(this).apply {
                     text = dialogMessage
                     typeface = Typeface.MONOSPACE  // ✅ 等寬字體
-                    setPadding(60, 50, 60, 30)
+                    setPadding(30, 50, 30, 40)
                     textSize = 16f
                 }
 
                 val myDialog = MyDialog(this)
+                    .setBackgroundColor(ContextCompat.getColor(this, R.color.sub_color))
                     .setTitle(getString(R.string.confirm_choice))
                     .setView(messageView)
-                myDialog.setButtonL(getString(R.string.reselect)) {
-                    startActivity(Intent(this, Finish_Page::class.java))
+                    .setMidButtonVisible(false)
+                myDialog.setButtonL(getString(R.string.reselect), Color.RED) {
                     myDialog.dismiss()
+                }
+                myDialog.setButtonR(getString(R.string.confirm_button),Color.BLACK){
+                    myDialog.dismiss()
+                    startActivity(Intent(this ,Finish_Page::class.java))
                 }
                 myDialog.show()
             }

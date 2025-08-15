@@ -9,8 +9,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.postDelayed
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -59,6 +61,9 @@ class Finish_Page : AppCompatActivity() {
                     HomeButtom.visibility = View.VISIBLE
                     TextShow.text = getString(R.string.progressFinish_text)
                     ImageShow.setImageResource(R.drawable.finish)
+                    handler.postDelayed({
+                        startActivity(Intent(this@Finish_Page, MainPage::class.java))
+                    }, 5000)
                 }
             }
         }, 2500)

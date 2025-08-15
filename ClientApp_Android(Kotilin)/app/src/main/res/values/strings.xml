@@ -15,6 +15,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="default_text">"Test Text"</string>
+    <string name="exit">EXIT</string>
     <!-- BarTitle -->
     <string name="title_information">Information</string>
     <string name="title_history">History</string>
@@ -37,6 +38,7 @@
     <string name="cannot_over_ten">Drink</string>
     <!--Setting-->
     <string name="title_firmwareNumber">firmware no.</string>
+    <string name="title_bluetooth">Bluetooth</string>
     <string name="title_language">Language</string>
     <string name="title_location">Location</string>
     <string name="title_brightness">Brightness</string>

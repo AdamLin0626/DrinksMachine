@@ -2,31 +2,40 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
+    android:layout_width="380dp"
     android:layout_height="wrap_content"
     android:id="@+id/windows"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
     <TextView
         android:id="@+id/dialogTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="0dp"
-        android:layout_gravity="center"
-        android:textSize="28sp"
+        android:gravity="center"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:padding="5dp"
         android:text="@string/default_text"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/rounded_rectangle_button"/>
     <LinearLayout
         android:id="@+id/dialogView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_gravity="left"
         android:orientation="horizontal" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/rounded_rectangle_button"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:padding="1dp"
         android:orientation="horizontal">
         <TextView
@@ -36,6 +45,12 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/default_text" />
+        <View
+            android:id="@+id/v1"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/rectangle_button"/>
         <TextView
             android:id="@+id/btnMid"
             android:layout_weight="1"
@@ -43,6 +58,12 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/default_text"/>
+        <View
+            android:id="@+id/v2"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/rectangle_button"/>
         <TextView
             android:id="@+id/btnRight"
             android:layout_weight="1"

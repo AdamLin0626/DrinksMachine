@@ -39,20 +39,22 @@ class MyDialog(context: Context) {
         return this
     }
 
-    fun setButtonL(text: String, onClick: (input: String) -> Unit): MyDialog {
-        binding.btnLeft.text = text
-        binding.btnLeft.setOnClickListener {
-            onClick("")
-        }
-        return this
-    }
-
     /**
      * binding.原件.visibility = ...
      * 如果我打true是可見，反之不可見
      */
     fun setLeftButtonVisible(visible: Boolean): MyDialog {
         binding.btnLeft.visibility = if (visible) View.VISIBLE else View.GONE
+        binding.v1.visibility = if (visible) View.VISIBLE else View.GONE
+
+        return this
+    }
+    fun setButtonL(text: String, color: Int, onClick: (input: String) -> Unit): MyDialog {
+        binding.btnLeft.text = text
+        binding.btnLeft.setOnClickListener {
+            onClick("")
+        }
+        binding.btnLeft.setTextColor(color)
         return this
     }
 
@@ -62,6 +64,15 @@ class MyDialog(context: Context) {
      */
     fun setMidButtonVisible(visible: Boolean): MyDialog {
         binding.btnMid.visibility = if (visible) View.VISIBLE else View.GONE
+        binding.v2.visibility = if (visible) View.VISIBLE else View.GONE
+        return this
+    }
+    fun setButtonM(text: String, color: Int, onClick: (input: String) -> Unit): MyDialog {
+        binding.btnMid.text = text
+        binding.btnLeft.setOnClickListener {
+            onClick("")
+        }
+        binding.btnMid.setTextColor(color)
         return this
     }
 
@@ -73,19 +84,12 @@ class MyDialog(context: Context) {
         binding.btnRight.visibility = if (visible) View.VISIBLE else View.GONE
         return this
     }
-
-    fun setButtonM(text: String, onClick: (input: String) -> Unit): MyDialog {
-        binding.btnMid.text = text
-        binding.btnMid.setOnClickListener {
-
-        }
-        return this
-    }
-
-    fun setButtonR(text: String, onClick: (input: String) -> Unit): MyDialog {
+    fun setButtonR(text: String, color: Int, onClick: (input: String) -> Unit): MyDialog {
         binding.btnRight.text = text
         binding.btnRight.setOnClickListener {
+            onClick("")
         }
+        binding.btnRight.setTextColor(color)
         return this
     }
 
