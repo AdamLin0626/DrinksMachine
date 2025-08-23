@@ -7,20 +7,16 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.drinksmachine.databinding.ActivityMainPageBinding
 import com.example.drinksmachine.uniFeatures.MyDialog
+import com.example.drinksmachine.uniFeatures.switchFragment
 
-class HomeFragment : Fragment(R.layout.activity_main_page) {
+class MainPage : Fragment(R.layout.activity_main_page) {
 
     private lateinit var ObjectBinging: ActivityMainPageBinding
     private var  clickCount = 0
@@ -66,7 +62,7 @@ class HomeFragment : Fragment(R.layout.activity_main_page) {
                             dialog.setView(editText)
                         dialog.setButtonR(getString(R.string.confirm_button), Color.RED) {
                             val pass = editText.text.toString()
-                            if( pass == "happyEnding") throw RuntimeException("App Crash") else Toast.makeText(requireContext(), "Password ❌",Toast.LENGTH_SHORT).show()
+                            if( pass == "TheEnd") throw RuntimeException("App Crash") else Toast.makeText(requireContext(), "Password ❌",Toast.LENGTH_SHORT).show()
                         }
                         dialog.setButtonL(getString(R.string.exit), Color.BLACK){
                             clickCount = 0
@@ -75,12 +71,13 @@ class HomeFragment : Fragment(R.layout.activity_main_page) {
                         dialog.show()
                     }
                 }
+
                 ObjectBinging.DiyButton -> switchFragment(DiyPage())
-                ObjectBinging.HistoryButton -> startActivity(Intent(requireContext(), History_Page::class.java))
+                ObjectBinging.HistoryButton -> switchFragment(History_Page())
                 ObjectBinging.LoginButton -> startActivity(Intent(requireContext(), Login_Page::class.java))
                 ObjectBinging.SignButton -> startActivity(Intent(requireContext(), SignUp_Page::class.java))
-                ObjectBinging.SettingButton -> startActivity(Intent(requireContext(), SettingPage::class.java))
-                ObjectBinging.InfoButton -> startActivity(Intent(requireContext(), Info_Page::class.java))
+                ObjectBinging.SettingButton -> switchFragment(SettingPage())
+                ObjectBinging.InfoButton -> switchFragment(Info_Page())
             }
         }
         ObjectBinging.logoIcon.setOnClickListener(buttonListener)
@@ -93,12 +90,6 @@ class HomeFragment : Fragment(R.layout.activity_main_page) {
         ObjectBinging.SettingButton.setOnClickListener(buttonListener)
 
 
-    }
-    private fun switchFragment(fragment: Fragment) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment) // fragment_container 是 MainActivity 裡的 FrameLayout
-            .addToBackStack(null) // 按返回鍵回上一頁
-            .commit()
     }
 
 }

@@ -1,37 +1,31 @@
 package com.example.drinksmachine
 
-import android.annotation.SuppressLint
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.widget.ScrollView
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.drinksmachine.databinding.ActivityInfoPageBinding
+
+class Info_Page: Fragment(R.layout.activity_info_page){
+    private lateinit var ObjectBinding: ActivityInfoPageBinding
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        ObjectBinding =ActivityInfoPageBinding.inflate(inflater,container,false)
+        return ObjectBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
 
-class Info_Page : AppCompatActivity() {
-    @SuppressLint("SuspiciousIndentation")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        val inputStream = requireContext().assets.open("Information.txt")
+        val content = inputStream.bufferedReader().use { it.readText() }
 
-        val TitleText = ContextCompat.getString(this, R.string.title_information)
-        val BarColor = ContextCompat.getColor(this, R.color.sub_color)
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(BarColor))
-        supportActionBar?.setTitle(TitleText)
-
-        val ScrollPage = ScrollView(this)
-        ScrollPage.setPadding(20, 20, 20, 20)
-        val ShowText = TextView(this).apply {
+        ObjectBinding.infoText.apply {
+            text = content
             textSize = 20f
             setTextColor(Color.BLACK)
         }
-
-        val inputStream = assets.open("Information.txt")
-        val content = inputStream.bufferedReader().use { it.readText() }
-        ShowText.text = content
-
-           ScrollPage.addView(ShowText)
-        setContentView(ScrollPage)
-        }
+    }
 }

@@ -1,30 +1,70 @@
 package com.example.drinksmachine
 
 import android.os.Bundle
-import android.view.View
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.drinksmachine.databinding.ActivityMainBinding
+import com.example.drinksmachine.uniFeatures.ActionBarHelper
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var ObjectBinding: ActivityMainBinding
+    private lateinit var Binding: ActivityMainBinding
+
+    private val handler = Handler(Looper.getMainLooper())
+    private val checkIntervalMs = 30_000L // 30秒
+
+    // 每 30 秒檢查一次
+    private val checkRunnable = object : Runnable {
+        override fun run() {
+            val current = getCurrentFragment()
+            Log.v("FragmentCheck", "定時檢查 - 目前 fragment: ${currentName(current)}")
+            handler.postDelayed(this, checkIntervalMs)
+        }
+    }
+
+    private val lifecycleCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
+        override fun onFragmentResumed(fm: FragmentManager, frag: Fragment) {
+            super.onFragmentResumed(fm, frag)
+            ActionBarHelper.updateActionBar(this@MainActivity, frag)    // 即時監聽 Fragment 切換 (resume)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 先隱藏，因為進入時會是 MainPage
         supportActionBar?.hide()
-        ObjectBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(ObjectBinding.root)
+        Binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(Binding.root)
 
-//        window.decorView.systemUiVisibility = (
-//                View.SYSTEM_UI_FLAG_FULLSCREEN
-//                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-//                )
+        // 啟動定時檢查
+        handler.post(checkRunnable)
+
+        // 註冊 lifecycle callbacks
+        supportFragmentManager.registerFragmentLifecycleCallbacks(lifecycleCallbacks, true)
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(ObjectBinding.fragmentContainer.id, HomeFragment()) // 預設頁面
+                .replace(Binding.fragmentContainer.id, MainPage()) // 預設頁面
                 .commit()
-
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(checkRunnable)
+        supportFragmentManager.unregisterFragmentLifecycleCallbacks(lifecycleCallbacks)
+    }
+
+    // 取得目前顯示的 fragment
+    private fun getCurrentFragment(): Fragment? {
+        return supportFragmentManager.findFragmentById(Binding.fragmentContainer.id)
+            ?: supportFragmentManager.primaryNavigationFragment
+    }
+
+    private fun currentName(f: Fragment?): String {
+        return f?.javaClass?.simpleName ?: "none"
     }
 }

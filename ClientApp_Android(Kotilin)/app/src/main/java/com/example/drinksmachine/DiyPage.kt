@@ -1,6 +1,5 @@
 package com.example.drinksmachine
 
-import com.example.drinksmachine.uniFeatures.MyDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -9,167 +8,149 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.core.content.ContextCompat
 import com.example.drinksmachine.databinding.ActivityDiyPageBinding
-import com.example.drinksmachine.databinding.ActivityMainPageBinding
+import com.example.drinksmachine.uniFeatures.MyDialog
+import com.example.drinksmachine.uniFeatures.switchFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 
 class DiyPage : Fragment() {
 
-    private lateinit var ObjectBinding: ActivityDiyPageBinding
-
+    private lateinit var Binding: ActivityDiyPageBinding
     private lateinit var fragmentDrink: OptionFragment
     private lateinit var fragmentTopping: OptionFragment
-    private var fragment_container_drink: Fragment? = null
-    private lateinit var  plaintext_drink: String
-    private lateinit var  plaintext_topping: String
+    private var fragmentContainer: Fragment? = null
+    private lateinit var plaintextDrink: String
+    private lateinit var plaintextTopping: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        ObjectBinding = ActivityDiyPageBinding.inflate(inflater, container, false)
-        return ObjectBinding.root
+        Binding = ActivityDiyPageBinding.inflate(inflater, container, false)
+        return Binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        plaintext_drink = getString(R.string.plaintext_drink)
-        plaintext_topping = getString(R.string.plaintext_topping)
+        plaintextDrink = getString(R.string.plaintext_drink)
+        plaintextTopping = getString(R.string.plaintext_topping)
 
-        // 初始化兩個 Fragment，分別代表不同選項類別
+        // 初始化兩個 Fragment
         fragmentDrink = OptionFragment.newInstance("Drink")
         fragmentTopping = OptionFragment.newInstance("Topping")
 
-        // 將兩個 Fragment 同時加入畫面，但預設只顯示 fragmentA
+        // 只加 fragmentDrink，fragmentTopping 等切換時再 add
         childFragmentManager.beginTransaction()
             .add(R.id.fragment_container_drink, fragmentDrink)
-            .add(R.id.fragment_container_drink, fragmentTopping)
-            .hide(fragmentTopping)
             .commit()
 
-        fragment_container_drink = fragmentDrink
+        fragmentContainer = fragmentDrink
 
-        // A 類型按鈕點擊事件（已在 XML 中定義 ID: btnA）
-        ObjectBinding.DrinkFragment.setOnClickListener {
-            switchToFragment(fragmentDrink)
-        }
+        Binding.DrinkFragment.setOnClickListener { switchToFragment(fragmentDrink) }
+        Binding.ToppingFragment.setOnClickListener { switchToFragment(fragmentTopping) }
 
-        // B 類型按鈕點擊事件（已在 XML 中定義 ID: btnB）
-        ObjectBinding.ToppingFragment.setOnClickListener {
-            switchToFragment(fragmentTopping)
-        }
-
-        // 下一步按鈕，整理選擇成 JSON 並換頁
-        ObjectBinding.NextPageButton.setOnClickListener {
+        Binding.NextPageButton.setOnClickListener {
             val selectedA = fragmentDrink.getSelectedOptions()
             val selectedB = fragmentTopping.getSelectedOptions()
 
-            val json = JSONObject().apply {
-                put("TypeA", JSONArray(selectedA))
-                put("TypeB", JSONArray(selectedB))
-            }
-
-            Log.i("NtPage", json.toString())
-
-            // 將 JSONObject 轉成 name -> count 的 Map
-            val drinkCountMap = mutableMapOf<String, Int>()
-            for (item in selectedA) {
-                val name = item.getString("name")
-                val count = item.getInt("count")
-                drinkCountMap[name] = count
-            }
-
-            val toppingCountMap = mutableMapOf<String, Int>()
-            for (item in selectedB) {
-                val name = item.getString("name")
-                val count = item.getInt("count")
-                toppingCountMap[name] = count
-            }
-
-            // 建立對齊排版文字（使用固定寬度格式）
-            val dialogMessage = buildString {
-                append("【"+ plaintext_drink +"】\n" )
-                if (drinkCountMap.isEmpty()) {
-                    append( getString(R.string.notSelected) + "\n")
-                } else {
-                    drinkCountMap.forEach { (name, count) ->
-                        val percentCount = "$count" + "0％"
-                        append(String.format("%-18s  %4s\n", name, percentCount))
-                    }
+            // 在背景線程生成 Dialog 文字
+            lifecycleScope.launch {
+                val dialogMessage = withContext(Dispatchers.Default) {
+                    buildDialogMessage(selectedA, selectedB)
                 }
 
-                append("\n【"+ plaintext_topping +"】\n" )
-                if (toppingCountMap.isEmpty()) {
-                    append( getString(R.string.notSelected) + "\n")
-                } else {
-                    toppingCountMap.forEach { (name, count) ->
-                        append(String.format("%-19s  x%3d\n", name, count))
-                    }
-                }
-            }
-
-            if (drinkCountMap.isEmpty()) {
-                // 用 TextView 顯示對話框，指定等寬字體
-                val messageAboutError = TextView(requireContext()).apply {
-                    text = getString(R.string.drink_is_empty)
-                    typeface = Typeface.MONOSPACE  // ✅ 等寬字體
-                    setPadding(30, 50, 30, 40)
-                    textSize = 16f
-                }
-
-                val myDialog = MyDialog(requireContext())
-                    .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.sub_color))
-                    .setTitle(getString(R.string.plaintext_error))
-                    .setMidButtonVisible(false)
-                    .setRightButtonVisible(false)
-                    .setView(messageAboutError)
-                myDialog.setButtonL(getString(R.string.reselect), Color.BLACK) {
-                    myDialog.dismiss()
-                }
-                myDialog.show()
-
-            }
-            else{
-                // 用 TextView 顯示對話框，指定等寬字體
-                val messageView = TextView(requireContext()).apply {
-                    text = dialogMessage
-                    typeface = Typeface.MONOSPACE  // ✅ 等寬字體
-                    setPadding(30, 50, 30, 40)
-                    textSize = 16f
-                }
-
-                val myDialog = MyDialog(requireContext())
-                    .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.sub_color))
-                    .setTitle(getString(R.string.confirm_choice))
-                    .setView(messageView)
-                    .setMidButtonVisible(false)
-                myDialog.setButtonL(getString(R.string.reselect), Color.RED) {
-                    myDialog.dismiss()
-                }
-                myDialog.setButtonR(getString(R.string.confirm_button),Color.BLACK){
-                    myDialog.dismiss()
-                    startActivity(Intent(requireContext() ,Finish_Page::class.java))
-                }
-                myDialog.show()
+                showDialog(dialogMessage, selectedA.isEmpty())
             }
         }
     }
 
-    // 切換 Fragment（使用 hide/show 可保留狀態，不重建畫面）
     private fun switchToFragment(target: Fragment) {
-        if (fragment_container_drink != target) {
-            childFragmentManager.beginTransaction()
-                .hide(fragment_container_drink!!)
-                .show(target)
-                .commit()
-            fragment_container_drink = target
+        val transaction = childFragmentManager.beginTransaction()
+        if (target.isAdded.not()) {
+            transaction.add(R.id.fragment_container_drink, target)
         }
+        fragmentContainer?.let { transaction.hide(it) }
+        transaction.show(target).commit()
+        fragmentContainer = target
+    }
+
+    private fun buildDialogMessage(selectedA: List<JSONObject>, selectedB: List<JSONObject>): String {
+        val drinkCountMap = mutableMapOf<String, Int>()
+        val toppingCountMap = mutableMapOf<String, Int>()
+
+        for (item in selectedA) {
+            val name = item.getString("name")
+            val count = item.getInt("count")
+            drinkCountMap[name] = count
+        }
+        for (item in selectedB) {
+            val name = item.getString("name")
+            val count = item.getInt("count")
+            toppingCountMap[name] = count
+        }
+
+        return buildString {
+            append("【$plaintextDrink】\n")
+            if (drinkCountMap.isEmpty()) {
+                append(getString(R.string.notSelected)).append("\n")
+            } else {
+                drinkCountMap.forEach { (name, count) ->
+                    val percentCount = "$count" + "0％"
+                    append(String.format("%-18s  %4s\n", name, percentCount))
+                }
+            }
+
+            append("\n【$plaintextTopping】\n")
+            if (toppingCountMap.isEmpty()) {
+                append(getString(R.string.notSelected)).append("\n")
+            } else {
+                toppingCountMap.forEach { (name, count) ->
+                    append(String.format("%-19s  x%3d\n", name, count))
+                }
+            }
+        }
+    }
+
+    private fun showDialog(message: String, isError: Boolean) {
+        // ScrollView 包裹 TextView，避免文字過多造成卡頓
+        val messageView = ScrollView(requireContext()).apply {
+            val textView = TextView(requireContext()).apply {
+                text = message
+                typeface = Typeface.MONOSPACE
+                setPadding(30, 50, 30, 40)
+                textSize = 16f
+            }
+            addView(textView)
+        }
+
+        val myDialog = MyDialog(requireContext())
+            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.sub_color))
+            .setTitle(if (isError) getString(R.string.plaintext_error) else getString(R.string.confirm_choice))
+            .setView(messageView)
+            .setMidButtonVisible(false)
+
+        if (isError) {
+            myDialog.setRightButtonVisible(false)
+            myDialog.setButtonL(getString(R.string.reselect), Color.BLACK) { myDialog.dismiss() }
+        } else {
+            myDialog.setButtonL(getString(R.string.reselect), Color.RED) { myDialog.dismiss() }
+            myDialog.setButtonR(getString(R.string.confirm_button), Color.BLACK) {
+                myDialog.dismiss()
+                switchFragment(Finish_Page())
+            }
+        }
+
+        myDialog.show()
     }
 }

@@ -19,26 +19,26 @@
             android:value="ca-app-pub-3940256099942544~3347511713"
             />
 
-        <activity
-            android:name=".Finish_Page"
-            android:exported="false"
-            />
-        <activity
-            android:name=".Info_Page"
-            android:exported="false"
-            />
-        <activity
-            android:name=".SettingPage"
-            android:exported="false"
-            />
-        <activity
-            android:name=".History_Page"
-            android:exported="false"
-            />
-        <activity
-            android:name=".DiyPage"
-            android:exported="false"
-            />
+<!--        <activity-->
+<!--            android:name=".Finish_Page"-->
+<!--            android:exported="false"-->
+<!--            />-->
+<!--        <activity-->
+<!--            android:name=".Info_Page"-->
+<!--            android:exported="false"-->
+<!--            />-->
+<!--        <activity-->
+<!--            android:name=".SettingPage"-->
+<!--            android:exported="false"-->
+<!--            />-->
+<!--        <activity-->
+<!--            android:name=".History_Page"-->
+<!--            android:exported="false"-->
+<!--            />-->
+<!--        <activity-->
+<!--            android:name=".DiyPage"-->
+<!--            android:exported="false"-->
+<!--            />-->
         <activity
             android:name=".SignUp_Page"
             android:exported="false"

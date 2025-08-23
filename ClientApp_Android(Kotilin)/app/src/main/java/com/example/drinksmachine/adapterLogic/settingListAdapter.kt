@@ -1,52 +1,47 @@
 package com.example.drinksmachine.adapterLogic
 
+import android.graphics.Color
+import android.provider.CalendarContract.Colors
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.drinksmachine.R
+import com.example.drinksmachine.databinding.SettingItemBinding
 
-data class TextModel(val name: String, val description: String)
+data class SettingItem(
+    val title: String,
+    val value: String = "",
+    val showArrow: Boolean = false
+)
 
-class settingListAdapter(
-    private var items: MutableList<TextModel>
-) : RecyclerView.Adapter<ItemViewHolder>() {
-    private var clickCount = 0
+class SettingAdapter(
+    private val items: List<SettingItem>,
+    private val onClick: (SettingItem) -> Unit
+) : RecyclerView.Adapter<SettingAdapter.ViewHolder>() {
 
-    fun setItemsToPretendInfinity(items: MutableList<TextModel>) {
-        this.items = items
-        notifyDataSetChanged()
+    inner class ViewHolder(private val binding: SettingItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: SettingItem) {
+            binding.titleText.text = item.title
+            binding.informationText.text = item.value
+            if (item.showArrow) binding.arrow.setTextColor(Color.BLACK) else binding.arrow.setTextColor(Color.WHITE)
+
+            binding.root.setOnClickListener { onClick(item) }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = SettingItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int = items.size
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.setting_view_item, parent, false)
-        return ItemViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = items[position]
-        holder.settingName.text = item.name
-        holder.settingShow.text = item.description
-
-        holder.card.setOnClickListener {
-            if (item.name == "版本"){
-                clickCount++
-                if (clickCount == 10) {
-                    // 故意模擬崩潰
-                    throw RuntimeException("Crashed intentionally after 10 clicks")
-                }
-            }
-        }
-    }
-}
-class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val card: CardView = view as CardView
-    val settingName: TextView = view.findViewById(R.id.settingName)
-    val settingShow: TextView = view.findViewById(R.id.settingShow)
-    val RandomButton: TextView = view.findViewById(R.id.RandomButton)
 }
