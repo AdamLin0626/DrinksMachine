@@ -73,6 +73,8 @@ class MainPage : Fragment(R.layout.activity_main_page) {
                 }
 
                 ObjectBinging.DiyButton -> switchFragment(DiyPage())
+                ObjectBinging.RandomButton
+                     -> Toast.makeText(requireContext(), getString(R.string.not_done), Toast.LENGTH_LONG).show()
                 ObjectBinging.HistoryButton -> switchFragment(History_Page())
                 ObjectBinging.LoginButton -> startActivity(Intent(requireContext(), Login_Page::class.java))
                 ObjectBinging.SignButton -> startActivity(Intent(requireContext(), SignUp_Page::class.java))

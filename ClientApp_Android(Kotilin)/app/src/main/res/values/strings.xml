@@ -39,10 +39,12 @@
     <!-- errorCode -->
     <string name="plaintext_error">ERROR!!</string>
     <string name="cannot_over_ten">Drink</string>
+    <string name="not_done">Not Done, yet !</string>
     <!--Setting-->
     <string name="title_firmwareNumber">firmware no.</string>
     <string name="title_bluetooth">Bluetooth</string>
     <string name="title_language">Language</string>
     <string name="title_location">Location</string>
     <string name="title_brightness">Brightness</string>
+    <string name="title_need_help">Help</string>
 </resources>

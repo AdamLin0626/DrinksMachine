@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 先隱藏，因為進入時會是 MainPage
         supportActionBar?.hide()
         Binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(Binding.root)

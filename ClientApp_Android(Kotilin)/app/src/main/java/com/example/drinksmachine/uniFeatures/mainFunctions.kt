@@ -1,8 +1,13 @@
 package com.example.drinksmachine.uniFeatures
 
+import android.graphics.Color
 import android.util.Log
+import android.view.Gravity
+import android.widget.TextView
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.drinksmachine.*
 
 /**
@@ -23,8 +28,37 @@ object ActionBarHelper {
                 activity.supportActionBar?.hide()
             }
             else -> {
-                activity.supportActionBar?.show()
-                activity.supportActionBar?.title = frag.javaClass.simpleName
+                activity.supportActionBar?.apply {
+                    // 隱藏預設標題
+                    setDisplayShowTitleEnabled(false)
+                    // 顯示 ActionBar
+                    show()
+                    // 設置背景
+                    setBackgroundDrawable(ContextCompat.getDrawable(activity, R.drawable.action_bar))
+
+                    // 建立置中標題 TextView
+                    val textView = TextView(activity).apply {
+                        text = when (frag) {
+                            is History_Page -> activity.getString(R.string.title_history)
+                            is SettingPage -> activity.getString(R.string.title_setting)
+                            is Info_Page -> activity.getString(R.string.title_information)
+                            is DiyPage -> activity.getString(R.string.title_diyPage)
+                            else -> ""
+                        }
+                        textSize = 30f // 可調整字型大小
+                        setTextColor(Color.WHITE)
+                        gravity = Gravity.CENTER
+                    }
+
+                    // 將自訂 TextView 放到 ActionBar
+                    val params = ActionBar.LayoutParams(
+                        ActionBar.LayoutParams.MATCH_PARENT,
+                        ActionBar.LayoutParams.WRAP_CONTENT
+                    )
+                    params.gravity = Gravity.CENTER
+                    customView = textView
+                    setDisplayShowCustomEnabled(true)
+                }
             }
         }
     }
