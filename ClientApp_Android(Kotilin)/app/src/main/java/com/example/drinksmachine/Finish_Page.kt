@@ -55,7 +55,7 @@ class Finish_Page : Fragment(R.layout.activity_finish_page) {
                 else {
                     ObjectBinging.HomePageButton.visibility = View.VISIBLE
                     ObjectBinging.ProgressTextShow.text = getString(R.string.progressFinish_text)
-                    ObjectBinging.ProgressImageShow.setImageResource(R.drawable.finish)
+                    ObjectBinging.ProgressImageShow.setImageResource(R.mipmap.finish)
                     handler.postDelayed({
                         switchFragment(MainPage())
                     }, 5000)

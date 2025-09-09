@@ -75,7 +75,6 @@ class OptionFragment : Fragment() {
                     val total = selectionMap.values.sumOf { getData ->
                         (getData()?.getInt("count") ?: 0)
                     }
-
                     if (total >= 10) {
                         Toast.makeText(requireContext(), getString(R.string.cannot_over_ten), Toast.LENGTH_SHORT).show()
                         return@setOnClickListener
@@ -100,22 +99,14 @@ class OptionFragment : Fragment() {
                 if (optionType == "Drink"){
                     if (count > 0){
                         count--
-                        timeText.text = "$count" + "0%"
+                        timeText.text = "${count}0%"
                         timeText.tag = count
                     }
                     if (count == 0){
-                        timeText.text = "$count" + "%"
+                        timeText.text = "$count"
                         timeText.tag = count
                     }
                 }
-                if (optionType != "Drink"){
-                    if (count > 0){
-                        count--
-                        timeText.text = "$count" + "0%"
-                        timeText.tag = count
-                    }
-                }
-
             }
 
             // ✅ 用 tag 拿到正確的數量
