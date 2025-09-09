@@ -1,13 +1,13 @@
 package com.example.drinksmachine.uniFeatures
 
-import android.graphics.Color
 import android.util.Log
-import android.view.Gravity
+import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.ActionBar
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.constraintlayout.widget.ConstraintSet.Layout
+import androidx.fragment.app.Fragment
+import androidx.transition.Visibility
 import com.example.drinksmachine.*
 
 /**
@@ -20,46 +20,23 @@ fun Fragment.switchFragment(fragment: Fragment, containerId: Int = R.id.fragment
         .commit()
     Log.v("myFragmentCheck", "即時切換 - resumed fragment: ${fragment::class.java.simpleName}")
 }
+fun setFragmentTitle(activity: AppCompatActivity, fragment: Fragment) {
+    val actionBarTitle_LL = activity.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.actionBarTitle_LL)
+    val actionBarTitle = activity.findViewById<TextView>(R.id.actionBarTitle)
+    val leftButton = activity.findViewById<ImageButton>(R.id.leftButton)
+    val rightButton = activity.findViewById<ImageButton>(R.id.rightButton)
 
-object ActionBarHelper {
-    fun updateActionBar(activity: AppCompatActivity, frag: Fragment) {
-        when (frag) {
-            is MainPage, is OptionFragment , is Finish_Page -> {
-                activity.supportActionBar?.hide()
-            }
-            else -> {
-                activity.supportActionBar?.apply {
-                    // 隱藏預設標題
-                    setDisplayShowTitleEnabled(false)
-                    // 顯示 ActionBar
-                    show()
-                    // 設置背景
-                    setBackgroundDrawable(ContextCompat.getDrawable(activity, R.drawable.action_bar))
+    val fragmentName = fragment::class.java.simpleName
 
-                    // 建立置中標題 TextView
-                    val textView = TextView(activity).apply {
-                        text = when (frag) {
-                            is History_Page -> activity.getString(R.string.title_history)
-                            is SettingPage -> activity.getString(R.string.title_setting)
-                            is Info_Page -> activity.getString(R.string.title_information)
-                            is DiyPage -> activity.getString(R.string.title_diyPage)
-                            else -> ""
-                        }
-                        textSize = 30f // 可調整字型大小
-                        setTextColor(Color.WHITE)
-                        gravity = Gravity.CENTER
-                    }
-
-                    // 將自訂 TextView 放到 ActionBar
-                    val params = ActionBar.LayoutParams(
-                        ActionBar.LayoutParams.MATCH_PARENT,
-                        ActionBar.LayoutParams.WRAP_CONTENT
-                    )
-                    params.gravity = Gravity.CENTER
-                    customView = textView
-                    setDisplayShowCustomEnabled(true)
-                }
-            }
-        }
+    if (fragmentName=="MainPage"|| fragmentName=="Finish_Page"){
+        actionBarTitle_LL.visibility = View.GONE
+    }else{
+        actionBarTitle_LL.visibility = View.VISIBLE
+        actionBarTitle.text = fragmentName
     }
+
+    leftButton.visibility = View.VISIBLE
+    leftButton.setOnClickListener { activity.supportFragmentManager.popBackStack() }
+    rightButton.visibility = View.GONE
+
 }
