@@ -16,6 +16,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="default_text">"Test Text"</string>
     <string name="exit">EXIT</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="password">Password</string>
     <!-- BarTitle -->
     <string name="title_information">Information</string>
     <string name="title_diyPage">DIY</string>
@@ -38,7 +40,7 @@
     <string name="home_page_button">＜ HOME PAGE</string>
     <!-- errorCode -->
     <string name="plaintext_error">ERROR!!</string>
-    <string name="cannot_over_ten">Drink</string>
+    <string name="cannot_over_ten">Can not Over 100%</string>
     <string name="not_done">Not Done, yet !</string>
     <!--Setting-->
     <string name="title_firmwareNumber">firmware no.</string>
