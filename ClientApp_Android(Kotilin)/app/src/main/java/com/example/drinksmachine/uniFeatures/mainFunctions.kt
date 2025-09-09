@@ -22,15 +22,22 @@ fun Fragment.switchFragment(fragment: Fragment, containerId: Int = R.id.fragment
 }
 fun setFragmentTitle(activity: AppCompatActivity, fragment: Fragment) {
     val actionBarTitle_LL = activity.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.actionBarTitle_LL)
+    val activityBackground = activity.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.activityBackground)
     val actionBarTitle = activity.findViewById<TextView>(R.id.actionBarTitle)
-    val leftButton = activity.findViewById<ImageButton>(R.id.leftButton)
+    val leftButton = activity.findViewById<TextView>(R.id.leftButton)
     val rightButton = activity.findViewById<ImageButton>(R.id.rightButton)
 
     val fragmentName = fragment::class.java.simpleName
 
-    if (fragmentName=="MainPage"|| fragmentName=="Finish_Page"){
+    if (fragmentName=="MainPage"){
+        activityBackground.setBackgroundResource(R.drawable.main_page_background)
         actionBarTitle_LL.visibility = View.GONE
-    }else{
+    }else if (fragmentName=="Finish_Page"){
+        activityBackground.setBackgroundResource(R.color.white)
+        actionBarTitle_LL.visibility = View.GONE
+    }
+    else{
+        activityBackground.setBackgroundResource(R.color.white)
         actionBarTitle_LL.visibility = View.VISIBLE
         actionBarTitle.text = fragmentName
     }

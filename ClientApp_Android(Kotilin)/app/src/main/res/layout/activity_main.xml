@@ -1,4 +1,5 @@
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/activityBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,17 +23,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- 左邊按鈕 -->
-        <ImageButton
+        <TextView
             android:id="@+id/leftButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
             android:background="@null"
             android:contentDescription="Left Button"
-            android:padding="8dp"
-            android:src="@android:drawable/ic_menu_revert"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:paddingStart="-5dp"
+            android:text="〈"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText"/>
 
         <!-- 中間標題 -->
         <TextView
