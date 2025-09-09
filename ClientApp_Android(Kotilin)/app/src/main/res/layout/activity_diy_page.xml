@@ -14,16 +14,17 @@
         <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/invisible"
             tools:ignore="MissingConstraints">
             <!-- 分頁標籤 -->
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:backgroundTint="@color/invisible"
                 android:orientation="horizontal">
-                <Space
+                <View
                     android:layout_width="20dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="0dp"/>
 
                 <Button
                     android:id="@+id/DrinkFragment"
@@ -32,9 +33,9 @@
                     android:padding="5dp"
                     android:text="@string/plaintext_drink"
                     android:textSize="18sp" />
-                <Space
+                <View
                     android:layout_width="20dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="0dp"/>
                 <Button
                     android:id="@+id/ToppingFragment"
                     android:layout_width="wrap_content"
@@ -42,9 +43,9 @@
                     android:text="@string/plaintext_topping"
                     android:textSize="18sp"
                     android:padding="5dp" />
-                <Space
+                <View
                     android:layout_width="20dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="0dp"/>
             </LinearLayout>
         </HorizontalScrollView>
         <ScrollView
@@ -61,8 +62,8 @@
         </ScrollView>
         <Button
             android:id="@+id/NextPage_Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
             android:textSize="18sp"
             android:background="@drawable/rounded_rectangle_button"
             android:backgroundTint="@color/main_color"
