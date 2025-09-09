@@ -1,14 +1,19 @@
 package com.example.drinksmachine
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.drinksmachine.databinding.ActivityMainBinding
-import com.example.drinksmachine.uniFeatures.ActionBarHelper
+import com.example.drinksmachine.kiosk.KioskHelper
+import com.example.drinksmachine.uniFeatures.setFragmentTitle
 
 class MainActivity : AppCompatActivity() {
     private lateinit var Binding: ActivityMainBinding
@@ -28,7 +33,9 @@ class MainActivity : AppCompatActivity() {
     private val lifecycleCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
         override fun onFragmentResumed(fm: FragmentManager, frag: Fragment) {
             super.onFragmentResumed(fm, frag)
-            ActionBarHelper.updateActionBar(this@MainActivity, frag)    // 即時監聽 Fragment 切換 (resume)
+            setFragmentTitle(this@MainActivity, frag)
+//            Binding.actionBar.text = frag::class.java.simpleName
+//            ActionBarHelper.updateActionBar(this@MainActivity, frag)    // 即時監聽 Fragment 切換 (resume)
         }
     }
 
@@ -37,9 +44,22 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         Binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(Binding.root)
+        KioskHelper.startKioskMode(this)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            window.setDecorFitsSystemWindows(false) // 全螢幕
+            val controller = window.insetsController
+            controller?.let {
+                it.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        }
 
-        // 啟動定時檢查
-        handler.post(checkRunnable)
 
         // 註冊 lifecycle callbacks
         supportFragmentManager.registerFragmentLifecycleCallbacks(lifecycleCallbacks, true)
@@ -49,6 +69,9 @@ class MainActivity : AppCompatActivity() {
                 .replace(Binding.fragmentContainer.id, MainPage()) // 預設頁面
                 .commit()
         }
+
+        // 啟動定時檢查
+        handler.post(checkRunnable)
     }
 
     override fun onDestroy() {

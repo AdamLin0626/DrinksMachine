@@ -1,20 +1,19 @@
 package com.example.drinksmachine
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.text.InputType
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.drinksmachine.databinding.ActivityMainPageBinding
-import com.example.drinksmachine.uniFeatures.MyDialog
+import com.example.drinksmachine.uniFeatures.DialogUtils
 import com.example.drinksmachine.uniFeatures.switchFragment
+import kotlin.concurrent.thread
 
 class MainPage : Fragment(R.layout.activity_main_page) {
 
@@ -45,30 +44,24 @@ class MainPage : Fragment(R.layout.activity_main_page) {
                 ObjectBinging.logoIcon -> {
                     clickCount++
                     if (clickCount == 10){
-                        val dialog = MyDialog(requireContext())
-                            .setTitle("關閉畫面中～ 密碼?")
-                            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.main_color))
-                            .setMidButtonVisible(false)
-                        val editText = EditText(requireContext()).apply {
-                            inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
-                            setPadding(35, 35, 35, 10)
-                            background = null
-                            hint = "Password"
-                            layoutParams = LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                            )
-                        }
-                            dialog.setView(editText)
-                        dialog.setButtonR(getString(R.string.confirm_button), Color.RED) {
-                            val pass = editText.text.toString()
-                            if( pass == "TheEnd") throw RuntimeException("App Crash") else Toast.makeText(requireContext(), "Password ❌",Toast.LENGTH_SHORT).show()
-                        }
-                        dialog.setButtonL(getString(R.string.exit), Color.BLACK){
-                            clickCount = 0
-                            dialog.dismiss()
-                        }
-                        dialog.show()
+                        clickCount = 0
+
+                        DialogUtils.showPasswordDialog(this,
+                            onConfirm = {password ->
+                                if (password =="theEnd"){
+                                    Toast.makeText(requireContext(), "app Crashing", Toast.LENGTH_SHORT).show()
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        // 測試用：強制 Crash
+                                        throw RuntimeException("App Crash 測試")
+                                    }, 1000)
+                                }else{
+                                    Toast.makeText(requireContext(), "密碼錯誤！", Toast.LENGTH_SHORT).show()
+                                }
+                            },
+                            onCancel = {
+                                Log.v("secretKey", "使用者取消輸入")
+                            }
+                        )
                     }
                 }
 

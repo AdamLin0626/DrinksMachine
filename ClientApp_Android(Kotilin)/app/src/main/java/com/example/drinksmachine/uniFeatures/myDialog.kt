@@ -1,10 +1,15 @@
 package com.example.drinksmachine.uniFeatures
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.example.drinksmachine.R
 import com.example.drinksmachine.databinding.MyDialogBinding
 
@@ -100,5 +105,38 @@ class MyDialog(context: Context) {
     fun dismiss(): MyDialog{
         dialog.dismiss()
         return this
+    }
+}
+
+object DialogUtils {
+
+    /**
+     * 顯示密碼輸入對話框 (自訂 layout)
+     */
+    fun showPasswordDialog(
+        fragment: Fragment,
+        onConfirm: (String) -> Unit,
+        onCancel: () -> Unit = {}
+    ) {
+        val inflater = LayoutInflater.from(fragment.requireContext())
+        val dialogView = inflater.inflate(R.layout.password_dialog, null)
+
+        val input = dialogView.findViewById<EditText>(R.id.passwordTextView)
+        val okButton = dialogView.findViewById<TextView>(R.id.okButton)
+        val cancelButton = dialogView.findViewById<TextView>(R.id.cancelButton)
+
+        val dialog = AlertDialog.Builder(fragment.requireContext())
+            .setView(dialogView)
+            .create()
+
+        okButton.setOnClickListener {
+            onConfirm(input.text.toString())
+        }
+        cancelButton.setOnClickListener {
+            onCancel()
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }
