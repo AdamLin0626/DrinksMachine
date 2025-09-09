@@ -1,7 +1,5 @@
 package com.example.drinksmachine
 
-import android.content.Intent
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -12,14 +10,12 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.core.content.ContextCompat
 import com.example.drinksmachine.databinding.ActivityDiyPageBinding
-import com.example.drinksmachine.uniFeatures.MyDialog
+import com.example.drinksmachine.uniFeatures.DialogUtils
 import com.example.drinksmachine.uniFeatures.switchFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONArray
 import org.json.JSONObject
 
 class DiyPage : Fragment() {
@@ -69,7 +65,6 @@ class DiyPage : Fragment() {
                 val dialogMessage = withContext(Dispatchers.Default) {
                     buildDialogMessage(selectedA, selectedB)
                 }
-
                 showDialog(dialogMessage, selectedA.isEmpty())
             }
         }
@@ -126,7 +121,7 @@ class DiyPage : Fragment() {
         // ScrollView 包裹 TextView，避免文字過多造成卡頓
         val messageView = ScrollView(requireContext()).apply {
             val textView = TextView(requireContext()).apply {
-                text = message
+                text = if(isError) getString(R.string.drink_is_empty) else message
                 typeface = Typeface.MONOSPACE
                 setPadding(30, 50, 30, 40)
                 textSize = 16f
@@ -134,23 +129,20 @@ class DiyPage : Fragment() {
             addView(textView)
         }
 
-        val myDialog = MyDialog(requireContext())
-            .setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.sub_color))
-            .setTitle(if (isError) getString(R.string.plaintext_error) else getString(R.string.confirm_choice))
-            .setView(messageView)
-            .setMidButtonVisible(false)
-
-        if (isError) {
-            myDialog.setRightButtonVisible(false)
-            myDialog.setButtonL(getString(R.string.reselect), Color.BLACK) { myDialog.dismiss() }
-        } else {
-            myDialog.setButtonL(getString(R.string.reselect), Color.RED) { myDialog.dismiss() }
-            myDialog.setButtonR(getString(R.string.confirm_button), Color.BLACK) {
-                myDialog.dismiss()
+        DialogUtils.showMessageDialog(this,
+            dialogTitle = if(isError)getString(R.string.plaintext_error)else getString(R.string.confirm_choice),
+            leftButtonText =  if(isError) getString(R.string.reselect) else getString(R.string.reselect),
+            midButtonText=  "",
+            rightButtonText= if (isError) "" else getString(R.string.confirm_button),
+            indexView = messageView ,
+            onNext = {
+                Log.v("buttonClick", "Dialog Right Button Select")
                 switchFragment(Finish_Page())
+            },
+            midButtonFunction = {},
+            onCancel = {
+                Log.v("buttonClick", "Dialog Left Button Select")
             }
-        }
-
-        myDialog.show()
+        )
     }
 }
