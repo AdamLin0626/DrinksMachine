@@ -14,61 +14,64 @@
         <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/invisible"
             android:padding="10dp"
+            android:background="@color/white"
             tools:ignore="MissingConstraints">
             <!-- 分頁標籤 -->
             <LinearLayout
+                android:id="@+id/tagBox"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:backgroundTint="@color/invisible"
+                android:layout_height="55dp"
                 android:orientation="horizontal">
-                <View
-                    android:layout_width="20dp"
-                    android:layout_height="0dp"/>
-
-                <Button
-                    android:id="@+id/DrinkFragment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/plaintext_drink"
-                    android:textSize="18sp" />
-                <View
-                    android:layout_width="20dp"
-                    android:layout_height="0dp"/>
-                <Button
-                    android:id="@+id/ToppingFragment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/plaintext_topping"
-                    android:textSize="18sp"
-                    android:padding="5dp" />
-                <View
-                    android:layout_width="20dp"
-                    android:layout_height="0dp"/>
             </LinearLayout>
         </HorizontalScrollView>
         <ScrollView
+            android:id="@+id/fragment_container1"
             android:layout_width="match_parent"
-            android:layout_height="600dp">
+            android:layout_height="600dp"
+            android:visibility="gone"
+            android:background="@color/white">
             <FrameLayout
                 android:id="@+id/fragment_container_drink"
                 android:layout_width="409dp"
-                android:layout_height="729dp"
+                android:layout_height="700dp"
                 android:orientation="vertical"
                 tools:layout_editor_absoluteX="1dp"
                 tools:layout_editor_absoluteY="1dp">
             </FrameLayout>
         </ScrollView>
-        <Button
-            android:id="@+id/NextPage_Button"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:background="@drawable/rounded_rectangle_button"
-            android:backgroundTint="@color/main_color"
-            android:text="@string/making_my_drink_button"/>
+        <LinearLayout
+            android:id="@+id/fragment_container2"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/chose_a_Class"
+                android:textColor="@color/main_color"
+                android:textSize="40sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/NextPage_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:background="@drawable/rounded_rectangle_button"
+                android:backgroundTint="@color/main_color"
+                android:text="@string/making_my_drink_button"/>
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
