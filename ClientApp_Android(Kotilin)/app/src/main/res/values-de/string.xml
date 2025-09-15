@@ -1,4 +1,10 @@
 <resources>
+    <string-array name="supported_languages_names">
+        <item>Englisch</item>
+        <item>Traditionelles Chinesisch</item>
+        <item>Japanisch</item>
+        <item>Deutsch</item>
+    </string-array>
     <string name="app_name">Getränkemaschine</string>
     <string name="diy_button">DIY</string>
     <string name="random_button">Zufall</string>
@@ -40,7 +46,7 @@
     <string name="default_text">Standardtext</string>
     <string name="chose_a_Class">Wähle eine Kategorie</string>
     <string name="title_firmwareNumber">Firmware Nr.</string>
-    <string name="title_bluetooth">Bluetooth</string>
+    <string name="title_wifi">Bluetooth</string>
     <string name="title_language">Sprache</string>
     <string name="title_location">Ort</string>
     <string name="title_brightness">Helligkeit</string>

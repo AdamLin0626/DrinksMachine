@@ -1,4 +1,10 @@
 <resources>
+    <string-array name="supported_languages_names">
+        <item>英文</item>
+        <item>繁體中文</item>
+        <item>日文</item>
+        <item>德文</item>
+    </string-array>
     <string name="app_name">智慧飲料機</string>
     <string name="diy_button">DIY</string>
     <string name="random_button">隨機</string>
@@ -40,7 +46,7 @@
     <string name="default_text">預設文字</string>
     <string name="chose_a_Class">選擇類別</string>
     <string name="title_firmwareNumber">韌體版本</string>
-    <string name="title_bluetooth">藍牙</string>
+    <string name="title_wifi">藍牙</string>
     <string name="title_language">語言</string>
     <string name="title_location">位置</string>
     <string name="title_brightness">亮度</string>

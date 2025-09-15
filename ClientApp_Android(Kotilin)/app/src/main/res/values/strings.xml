@@ -1,4 +1,10 @@
 <resources>
+    <string-array name="supported_languages_names">
+        <item>English</item>
+        <item>Traditional Chinese</item>
+        <item>Japanese</item>
+        <item>German</item>
+    </string-array>
     <string name="app_name">DrinksMachine</string>
     <string name="diy_button">DIY</string>
     <string name="random_button">Random</string>
@@ -45,7 +51,7 @@
     <string name="chose_a_Class">chose a Class</string>
     <!--Setting-->
     <string name="title_firmwareNumber">firmware no.</string>
-    <string name="title_bluetooth">Bluetooth</string>
+    <string name="title_wifi">WiFi</string>
     <string name="title_language">Language</string>
     <string name="title_location">Location</string>
     <string name="title_brightness">Brightness</string>

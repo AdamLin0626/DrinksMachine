@@ -1,4 +1,10 @@
 <resources>
+    <string-array name="supported_languages_names">
+        <item>英語</item>
+        <item>繁体字中国語</item>
+        <item>日本語</item>
+        <item>ドイツ語</item>
+    </string-array>
     <string name="app_name">ドリンクマシン</string>
     <string name="diy_button">DIY</string>
     <string name="random_button">ランダム</string>
@@ -40,7 +46,7 @@
     <string name="default_text">デフォルトテキスト</string>
     <string name="chose_a_Class">クラスを選択</string>
     <string name="title_firmwareNumber">ファームウェア番号</string>
-    <string name="title_bluetooth">ブルートゥース</string>
+    <string name="title_wifi">ブルートゥース</string>
     <string name="title_language">言語</string>
     <string name="title_location">位置</string>
     <string name="title_brightness">明るさ</string>
