@@ -1,0 +1,13 @@
+<!-- res/layout/custom_button.xml -->
+<Button
+    android:id="@+id/typeButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:text="@string/plaintext_drink"
+    android:textColor="@color/white"
+    android:textSize="16sp"
+    android:textStyle="bold"
+    android:background="@drawable/rectangle_button"
+    android:backgroundTint="@color/main_color"
+    xmlns:android="http://schemas.android.com/apk/res/android"/>
