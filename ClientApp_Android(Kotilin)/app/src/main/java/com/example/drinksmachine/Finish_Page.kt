@@ -38,11 +38,15 @@ class Finish_Page : Fragment(R.layout.activity_finish_page) {
             ObjectBinging.HomePageButton.visibility = View.INVISIBLE
             startProgress()
             ObjectBinging.HomePageButton.setOnClickListener {
-                switchFragment(MainPage())
+                clearBackStackAndSwitchToMainPage( )
             }
         }
+    override  fun onStop( ) {
+        super.onStop( )
+        handler.removeCallbacksAndMessages( null )
+    }
 
-    private fun startProgress() {
+    private fun startProgress( ) {
         handler.postDelayed(object : Runnable {
             override fun run() {
                 if (progress <= 100) {
@@ -50,18 +54,24 @@ class Finish_Page : Fragment(R.layout.activity_finish_page) {
                     var mess: String = getString(R.string.progressPreparing_text)+progress +"%"
                     ObjectBinging.ProgressTextShow.text = mess
                     progress += 10
-                    handler.postDelayed(this, 500) // 每秒更新
+                    handler.postDelayed(this, 2_00L) // 每秒更新
                 }
                 else {
                     ObjectBinging.HomePageButton.visibility = View.VISIBLE
                     ObjectBinging.ProgressTextShow.text = getString(R.string.progressFinish_text)
                     ObjectBinging.ProgressImageShow.setImageResource(R.mipmap.finish)
                     handler.postDelayed({
-                        switchFragment(MainPage())
-                    }, 5000)
+                        clearBackStackAndSwitchToMainPage( )
+                    }, 100_00L)
                 }
             }
-        }, 2500)
+        }, 15_00L)
+    }
+    private fun clearBackStackAndSwitchToMainPage() {
+        // 清除所有在返回堆疊中的 Fragment
+        parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        // 切換到主頁
+        switchFragment(MainPage())
     }
 }
 

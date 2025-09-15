@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/invisible"
+            android:padding="10dp"
             tools:ignore="MissingConstraints">
             <!-- 分頁標籤 -->
             <LinearLayout
@@ -70,7 +71,4 @@
             android:backgroundTint="@color/main_color"
             android:text="@string/making_my_drink_button"/>
     </LinearLayout>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

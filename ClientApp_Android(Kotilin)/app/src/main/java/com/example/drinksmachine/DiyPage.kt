@@ -21,8 +21,8 @@ import org.json.JSONObject
 class DiyPage : Fragment() {
 
     private lateinit var Binding: ActivityDiyPageBinding
-    private lateinit var fragmentDrink: OptionFragment
-    private lateinit var fragmentTopping: OptionFragment
+    private lateinit var fragmentDrink: optionsFragment
+    private lateinit var fragmentTopping: optionsFragment
     private var fragmentContainer: Fragment? = null
     private lateinit var plaintextDrink: String
     private lateinit var plaintextTopping: String
@@ -43,12 +43,14 @@ class DiyPage : Fragment() {
         plaintextTopping = getString(R.string.plaintext_topping)
 
         // 初始化兩個 Fragment
-        fragmentDrink = OptionFragment.newInstance("Drink")
-        fragmentTopping = OptionFragment.newInstance("Topping")
+        fragmentDrink = optionsFragment.newInstance("DRINK")
+        fragmentTopping = optionsFragment.newInstance("Tea")
 
         // 只加 fragmentDrink，fragmentTopping 等切換時再 add
         childFragmentManager.beginTransaction()
             .add(R.id.fragment_container_drink, fragmentDrink)
+//            .add(R.id.fragment_container_drink, fragmentTopping)
+//            .hide(fragmentTopping)
             .commit()
 
         fragmentContainer = fragmentDrink

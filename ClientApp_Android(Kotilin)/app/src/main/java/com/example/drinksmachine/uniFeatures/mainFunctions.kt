@@ -36,7 +36,11 @@ fun setFragmentTitle(activity: AppCompatActivity, fragment: Fragment) {
         activityBackground.setBackgroundResource(R.color.white)
         actionBarTitle_LL.visibility = View.GONE
     }
-    else{
+    else if(fragmentName == "optionsFragment" || fragmentName == "DiyPage"){
+        activityBackground.setBackgroundResource(R.color.white)
+        actionBarTitle_LL.visibility = View.VISIBLE
+        actionBarTitle.setText( R.string.title_diyPage )
+    } else{
         activityBackground.setBackgroundResource(R.color.white)
         actionBarTitle_LL.visibility = View.VISIBLE
         actionBarTitle.text = fragmentName

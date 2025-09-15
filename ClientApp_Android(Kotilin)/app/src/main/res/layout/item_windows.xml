@@ -15,15 +15,15 @@
         android:backgroundTint="@color/light_gray">
         <TextView
             android:id="@+id/OptionName"
-            android:layout_width="140dp"
-            android:layout_height="105dp"
+            android:layout_width="160dp"
+            android:layout_height="120dp"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:gravity="center"
             android:hint="DrinksName"/>
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="140dp"
+            android:layout_width="160dp"
             android:layout_height="36dp"
             android:background="@drawable/rounded_rectangle_button"
             android:backgroundTint="@color/sub_color">
