@@ -14,7 +14,6 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="default_text">"Test Text"</string>
     <string name="exit">EXIT</string>
     <string name="cancel_text">Cancel</string>
     <string name="password">Password</string>
@@ -42,6 +41,8 @@
     <string name="plaintext_error">ERROR!!</string>
     <string name="cannot_over_ten">Can not Over 100%</string>
     <string name="not_done">Not Done, yet !</string>
+    <string name="default_text">Default Text</string>
+    <string name="chose_a_Class">chose a Class</string>
     <!--Setting-->
     <string name="title_firmwareNumber">firmware no.</string>
     <string name="title_bluetooth">Bluetooth</string>
