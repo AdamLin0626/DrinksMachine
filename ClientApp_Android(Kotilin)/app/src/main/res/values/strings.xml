@@ -49,4 +49,17 @@
     <string name="title_location">Location</string>
     <string name="title_brightness">Brightness</string>
     <string name="title_need_help">Help</string>
+    <!--Tag-->
+    <string name="drink_button">Drink</string>
+    <string name="topping_button">Topping</string>
+    <string name="otherdrink_button">Other Drink</string>
+    <string name="dairy_button">Dairy</string>
+    <string name="tea_button">Tea</string>
+    <string name="juice_button">Juice</string>
+    <string name="tapiocapearls_button">Tapioca Pearls</string>
+    <string name="fruit_button">Fruit</string>
+    <string name="puddingcream_button">Pudding&amp;Cream</string>
+    <string name="jelly_button">Jelly</string>
+    <string name="grains_button">Grains</string>
+
 </resources>
