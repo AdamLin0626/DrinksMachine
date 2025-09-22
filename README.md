@@ -5,7 +5,7 @@ App專案區
 &emsp;&emsp;├ &emsp;&emsp; [AppInventor 版本（測試試用版_有完整功能及未來雛形 ）](https://github.com/AdamLin0626/DrinksMachine/tree/main/ClientApp_AppInventor(完整功能))  
 &emsp;&emsp;└ &emsp;&emsp; [AndroidStudio（Kotlin版本）持續撰寫中...](https://github.com/AdamLin0626/DrinksMachine/tree/main/ClientApp_Android(Kotilin)) &emsp;&emsp;  
 
-[UI design by Figma](https://www.figma.com/proto/JpJXJRiiAUezNKl1BZxRH2/DrinksMachine-APP?node-id=1-21&p=f&t=f7tkqpoAnLhn3m0q-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A146)
+[UI design by Figma](https://www.figma.com/proto/JpJXJRiiAUezNKl1BZxRH2/DrinksMachine-APP?node-id=1-21&p=f&t=f7tkqpoAnLhn3m0q-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A146)  
 [模型零件](https://github.com/AdamLin0626/DrinksMachine/tree/main/3D_OBJ)  
 [自動化機械控制檔案](https://github.com/AdamLin0626/DrinksMachine/blob/main/MachineControlFirmware.py)
 
