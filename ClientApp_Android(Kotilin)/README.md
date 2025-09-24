@@ -1,5 +1,4 @@
-#### Android studio製作的版本，進行中...
-#### 此為android(Kotlin)版本
+#### 此為android(Kotlin)版本，製作進行中...
 ### APP設計概要：智慧飲品工坊點餐系統
 
 #### 一、開發平台與技術
